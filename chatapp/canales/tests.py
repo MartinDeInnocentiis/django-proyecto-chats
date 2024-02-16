@@ -8,7 +8,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.routers import DefaultRouter
 from rest_framework.viewsets import ModelViewSet
 
-from chatapp.pytest_fixtures import *
+from pytest_fixtures import *
 from canales import models
 
 @pytest.mark.django_db()
