@@ -76,6 +76,8 @@ class MensajeGetCreateAPIView(ListCreateAPIView):
 class ChatMensajesListView(ListAPIView):
     serializer_class = MensajeSerializer
     permission_classes = [IsAuthenticated]  
+    pagination_class = None
+    
     def get_queryset(self):
         chat_id = self.kwargs['chat_id']
         return Mensaje.objects.filter(chat_id=chat_id)
