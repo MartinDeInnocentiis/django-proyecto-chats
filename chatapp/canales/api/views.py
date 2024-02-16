@@ -47,7 +47,6 @@ class MensajePagination(PageNumberPagination):
 class GetChatsAPIView(ListCreateAPIView):
     queryset = Chat.objects.all().order_by('id')
     serializer_class = ChatSerializer
-    permission_classes = [AllowAny]
     pagination_class = None
     
 class ChatRetrieveUpdateAPIView(RetrieveUpdateAPIView):
@@ -65,7 +64,6 @@ class ChatRetrieveUpdateAPIView(RetrieveUpdateAPIView):
 class MensajeGetCreateAPIView(ListCreateAPIView):
     queryset = Mensaje.objects.all()
     serializer_class = MensajeSerializer
-    permission_classes = [AllowAny]
     pagination_class = MensajePagination
 
     def post(self, request, *args, **kwargs):
@@ -85,7 +83,6 @@ class ChatMensajesListView(ListAPIView):
     
 class ChatUserMensajesListView(ListAPIView):
     serializer_class = MensajeSerializer
-    permission_classes = [AllowAny]
     pagination_class = None
     
     def get_queryset(self):
