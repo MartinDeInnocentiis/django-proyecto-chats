@@ -20,6 +20,7 @@ from rest_framework.generics import (
     GenericAPIView,
     UpdateAPIView
 )
+
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
 from rest_framework.validators import ValidationError
@@ -42,11 +43,12 @@ class MensajePagination(PageNumberPagination):
     page_size = 10 
     page_size_query_param = 'page_size'
     max_page_size = 100
-
+    
 class GetChatsAPIView(ListCreateAPIView):
     queryset = Chat.objects.all().order_by('id')
     serializer_class = ChatSerializer
-    
+    permission_classes = [AllowAny]
+    pagination_class = None
     
 class ChatRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Chat.objects.all()
@@ -63,6 +65,7 @@ class ChatRetrieveUpdateAPIView(RetrieveUpdateAPIView):
 class MensajeGetCreateAPIView(ListCreateAPIView):
     queryset = Mensaje.objects.all()
     serializer_class = MensajeSerializer
+    permission_classes = [AllowAny]
     pagination_class = MensajePagination
 
     def post(self, request, *args, **kwargs):
@@ -82,7 +85,9 @@ class ChatMensajesListView(ListAPIView):
     
 class ChatUserMensajesListView(ListAPIView):
     serializer_class = MensajeSerializer
-
+    permission_classes = [AllowAny]
+    pagination_class = None
+    
     def get_queryset(self):
         chat_id = self.kwargs['chat_id']
         username = self.kwargs['username']
